@@ -2,7 +2,7 @@
 "use strict";
 var CAT={D:"Drill",M:"Mission",V:"Vessel acquisition",X:"Maintenance",A:"Admin"};
 var UNIT={N:"North Harbor Det",O:"MCC ONE",H:"Other / HQ"};
-var SRC={D:"Johan Lai's Drive (Imagery)",G:"Johan Lai's Gmail",A:"Photo archive courtesy of Bob Reynolds"};
+var SRC={D:"MCC ONE records",G:"Email records",A:"Photo archive courtesy of Bob Reynolds"};
 var MON=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 var T=window.TIMELINE||[], P=window.PHOTOS||[], EG=window.ENTRY_GAL||{}, PE=window.PHOTO_ENTRY||{};
 var IDX2G={};Object.keys(EG).forEach(function(k){EG[k].i.forEach(function(i){IDX2G[i]=k;});});

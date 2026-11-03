@@ -1,4 +1,4 @@
-/* Gallery manifest. src: D = Johan Lai's Drive (CMD/CSG/MARCOM/Imagery), G = Johan Lai's Gmail attachments, A = photo archive courtesy of Bob Reynolds. */
+/* Gallery manifest. src: D = MCC ONE records, G = email records, A = photo archive courtesy of Bob Reynolds. */
 window.PHOTOS = [
  {f:"firstuta16_1427.jpg", d:"2016-09", t:"MARSCOM's first drill (first UTA), September 2016.", s:"D", g:"People"},
  {f:"A_hornet16_formation.jpg", d:"2016-11-20", t:"MARSCOM North members in formation aboard the ex-USS Hornet, 20 NOV 2016.", s:"A", g:"People"},
