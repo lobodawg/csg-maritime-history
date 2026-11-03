@@ -4,7 +4,9 @@ var CAT={D:"Drill",M:"Mission",V:"Vessel acquisition",X:"Maintenance",A:"Admin"}
 var UNIT={N:"North Harbor Det",O:"MCC ONE",H:"Other / HQ"};
 var SRC={D:"Johan Lai's Drive (Imagery)",G:"Johan Lai's Gmail",A:"Photo archive courtesy of Bob Reynolds"};
 var MON=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-var T=window.TIMELINE||[], P=window.PHOTOS||[];
+var T=window.TIMELINE||[], P=window.PHOTOS||[], EG=window.ENTRY_GAL||{}, PE=window.PHOTO_ENTRY||{};
+var IDX2G={};Object.keys(EG).forEach(function(k){EG[k].i.forEach(function(i){IDX2G[i]=k;});});
+function thumbOf(f){return f.indexOf("x/")===0?"assets/img/x/thumb/"+f.slice(2):"assets/img/thumb/"+f;}
 function $(id){return document.getElementById(id);}
 function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
 function fmt(d){var p=d.split("-");if(p.length===3)return p[2]+" "+MON[+p[1]-1]+" "+p[0];if(p.length===2)return MON[+p[1]-1]+" "+p[0];return d;}
@@ -74,7 +76,14 @@ function render(){
     var li=el("li","entry c"+r.c);
     var top=el("div","etop");top.appendChild(el("time",null,fmt(r.d)));top.appendChild(el("span","tag c"+r.c,CAT[r.c]));top.appendChild(el("span","tag unit",UNIT[r.u]));
     if(r.v)top.appendChild(el("span","tag ves",r.v));if(r.ph){var c=el("span","cam","\uD83D\uDCF7");c.title="Photos or video in the source collections";c.setAttribute("aria-label","has photos");top.appendChild(c);}
-    li.appendChild(top);li.appendChild(el("p","ev",r.e));
+    li.appendChild(top);
+    var gk=IDX2G[T.indexOf(r)];
+    if(gk){var g=EG[gk],tb=el("button","ethumb");tb.type="button";var n=g.p.length;
+      tb.setAttribute("aria-label","Open "+(n>1?n+" photos":"photo")+" for this entry");
+      var ti=el("img");ti.src=thumbOf(g.p[0].f);ti.alt=g.p[0].t;ti.loading="lazy";tb.appendChild(ti);
+      if(n>1)tb.appendChild(el("span","ecount",n+" photos"));
+      tb.addEventListener("click",function(){openGal(gk,0);});li.appendChild(tb);li.classList.add("hasimg");}
+    li.appendChild(el("p","ev",r.e));
     var meta=[];if(r.l)meta.push("Where: "+r.l);if(r.p)meta.push("People: "+r.p);
     if(meta.length)li.appendChild(el("p","meta",meta.join("  \u00B7  ")));
     if(r.s.length)li.appendChild(el("p","srcl","Source: "+r.s.join("; ")));
@@ -98,18 +107,26 @@ function gal(g){G.innerHTML="";gcur=cur=P.filter(function(p){return g==="All"||p
   Array.prototype.forEach.call(GF.children,function(b){b.classList.toggle("on",b.textContent===g);b.setAttribute("aria-pressed",b.textContent===g);});
   cur.forEach(function(p,i){var li=el("li");var b=el("button","gbtn");b.type="button";b.setAttribute("aria-label","Open photo: "+p.t);
     var im=el("img");im.src="assets/img/thumb/"+p.f;im.alt=p.t;im.loading="lazy";b.appendChild(im);
-    var cap=el("span","gcap",p.t+(p.s==="A"?" \u00B7 Bob Reynolds archive":""));b.appendChild(cap);b.addEventListener("click",function(){cur=gcur;openLb(i);});li.appendChild(b);G.appendChild(li);});}
+    var cap=el("span","gcap",p.t+(p.s==="A"?" \u00B7 Bob Reynolds archive":""));b.appendChild(cap);b.addEventListener("click",function(){if(PE[p.f])openGalFor(p.f);else{cur=gcur;openLb(i);}});if(PE[p.f]&&EG[PE[p.f]].p.length>1)b.appendChild(el("span","gcount",EG[PE[p.f]].p.length));li.appendChild(b);G.appendChild(li);});}
 groups.forEach(function(g){var b=el("button","gchip",g);b.type="button";b.addEventListener("click",function(){gal(g);});GF.appendChild(b);});
 gal("All");
 var LB=$("lightbox"),LI=$("lb-img"),LC=$("lb-cap"),lastFocus=null;
-function show(){var p=cur[idx];LI.src="assets/img/"+p.f;LI.alt=p.t;LC.textContent="";LC.appendChild(el("span",null,p.t));LC.appendChild(el("small",null,(p.d?fmt(p.d)+" \u00B7 ":"")+SRC[p.s]+"  ("+(idx+1)+"/"+cur.length+")"));}
+function show(){var p=cur[idx];LI.src="assets/img/"+p.f;LI.alt=p.t;LC.textContent="";LC.appendChild(el("span",null,p.t));
+  var cr=(p.d?fmt(p.d)+" \u00B7 ":"")+SRC[p.s];LC.appendChild(el("small",null,cr));
+  var multi=cur.length>1;$("lb-count").textContent=multi?(idx+1)+" of "+cur.length:"";$("lb-count").hidden=!multi;
+  $("lb-prev").hidden=$("lb-next").hidden=!multi;
+  if(multi){var nx=new Image();nx.src="assets/img/"+cur[(idx+1)%cur.length].f;}}
+function openGal(k,i){cur=EG[k].p;openLb(i||0);}
+function openGalFor(f){var k=PE[f];if(!k)return false;var L=EG[k].p,i=0;L.forEach(function(q,j){if(q.f===f)i=j;});openGal(k,i);return true;}
 function openLb(i){lastFocus=document.activeElement;idx=i;show();LB.hidden=false;document.body.classList.add("noscroll");$("lb-close").focus();}
 function closeLb(){LB.hidden=true;document.body.classList.remove("noscroll");if(lastFocus)lastFocus.focus();}
 function step(n){idx=(idx+n+cur.length)%cur.length;show();}
 $("lb-close").addEventListener("click",closeLb);$("lb-prev").addEventListener("click",function(){step(-1);});$("lb-next").addEventListener("click",function(){step(1);});
 LB.addEventListener("click",function(e){if(e.target===LB)closeLb();});
-document.addEventListener("keydown",function(e){if(LB.hidden)return;if(e.key==="Escape")closeLb();else if(e.key==="ArrowLeft")step(-1);else if(e.key==="ArrowRight")step(1);});
-/* single-image lightbox for fleet/mission images */
-document.addEventListener("click",function(e){var t=e.target;if(t.tagName==="IMG"&&t.dataset.full&&!t.closest(".gbtn")){cur=[{f:t.dataset.full.replace("assets/img/",""),t:t.alt,d:"",s:(P.filter(function(p){return "assets/img/"+p.f===t.dataset.full;})[0]||{s:"D"}).s}];
-  var m=P.filter(function(p){return "assets/img/"+p.f===t.dataset.full;})[0];if(m)cur=[m];openLb(0);}});
+var tx=null,ty=null;LB.addEventListener("touchstart",function(e){if(e.touches.length===1){tx=e.touches[0].clientX;ty=e.touches[0].clientY;}},{passive:true});
+LB.addEventListener("touchend",function(e){if(tx===null||cur.length<2)return;var dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;tx=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.2)step(dx<0?1:-1);},{passive:true});
+document.addEventListener("keydown",function(e){if(LB.hidden)return;if(e.key==="Escape")closeLb();else if(e.key==="ArrowLeft"&&cur.length>1)step(-1);else if(e.key==="ArrowRight"&&cur.length>1)step(1);});
+/* fleet/mission images open their entry gallery (or a single image) */
+document.addEventListener("click",function(e){var t=e.target;if(t.tagName==="IMG"&&t.dataset.full&&!t.closest(".gbtn")&&!t.closest(".ethumb")){var f=t.dataset.full.replace("assets/img/","");
+  if(openGalFor(f))return;var m=P.filter(function(p){return p.f===f;})[0];cur=[m||{f:f,t:t.alt,d:"",s:"D"}];openLb(0);}});
 })();
