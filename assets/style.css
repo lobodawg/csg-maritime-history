@@ -34,7 +34,7 @@ h3{font-size:1.25rem;margin:1em 0 .4em}
 @media (max-width:900px){.nav-toggle{display:block}.nav ul{display:none;position:absolute;top:56px;right:12px;flex-direction:column;background:var(--navy);padding:8px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.35)}.nav ul.open{display:flex}.topbar{background:rgba(11,31,58,.96)}}
 /* hero */
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:var(--navy)}
-.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 100%}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%}
 .hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,58,.5) 0%,rgba(11,31,58,.05) 30%,rgba(11,31,58,.35) 58%,rgba(8,22,42,.92) 82%,rgba(8,22,42,.97) 100%)}
 .hero-text{position:relative;max-width:1180px;margin:0 auto;padding:0 24px 64px;width:100%}
 .hero h1{color:#fff;font-size:clamp(2.2rem,4.6vw,3.7rem);margin:.15em 0 .3em;text-shadow:0 2px 18px rgba(0,0,0,.45)}
@@ -152,7 +152,7 @@ h3{font-size:1.25rem;margin:1em 0 .4em}
 /* sources */
 .src{padding-left:1.1em}.src li{margin:.4em 0}.src .url{display:block;font-size:.75rem;color:var(--muted);word-break:break-all}
 @media (max-width:640px){
- .hero-img{object-position:55% 20%}
+ .hero-img{object-position:42% center}
  .hero-shade{background:linear-gradient(180deg,rgba(11,31,58,.45) 0%,rgba(11,31,58,.1) 25%,rgba(8,22,42,.75) 48%,rgba(8,22,42,.96) 70%)}
  .hero-text{padding-bottom:40px}.lede{font-size:1rem}.hero-cap{display:none}
  .eyebrow{font-size:.7rem}.band{padding:60px 0}
