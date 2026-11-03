@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://lobodawg.github.io/csg-maritime-history/sitemap.xml
