@@ -27,15 +27,16 @@ stats.forEach(function(s){var d=el("div","stat");d.appendChild(el("b",null,Strin
 
 /* heritage */
 var M=window.MUSEUM, hl=$("heritage-list");
+function arch(k){var w=el("span","arch"," (");var a=el("a",null,"archived copy");a.href="sources/militarymuseum/"+k+".html";a.title="Local archived copy of this militarymuseum.org page, retrieved 03 NOV 2026";w.appendChild(a);w.appendChild(document.createTextNode(")"));return w;}
 (window.HERITAGE||[]).forEach(function(h){
   var li=el("li",h.modern?"modern":null);li.appendChild(el("span","hy",h.y));
   var c=el("div","hc");c.appendChild(el("h3",null,h.h));c.appendChild(el("p",null,h.b));
   var s=el("p","cite");s.appendChild(document.createTextNode("Source: "));
-  h.s.forEach(function(k,i){if(i)s.appendChild(document.createTextNode("; "));var a=el("a",null,M[k].t);a.href=M[k].u;a.rel="noopener";a.target="_blank";s.appendChild(a);});
+  h.s.forEach(function(k,i){if(i)s.appendChild(document.createTextNode("; "));var a=el("a",null,M[k].t);a.href=M[k].u;a.rel="noopener";a.target="_blank";s.appendChild(a);s.appendChild(arch(k));});
   if(h.modern){s.appendChild(document.createTextNode("; CSG Maritime Timeline"));}
   c.appendChild(s);li.appendChild(c);hl.appendChild(li);
 });
-var hs=$("heritage-sources");Object.keys(M).forEach(function(k){var li=el("li");var a=el("a",null,M[k].t);a.href=M[k].u;a.rel="noopener";a.target="_blank";li.appendChild(a);li.appendChild(el("span","url"," "+M[k].u));hs.appendChild(li);});
+var hs=$("heritage-sources");Object.keys(M).forEach(function(k){var li=el("li");var a=el("a",null,M[k].t);a.href=M[k].u;a.rel="noopener";a.target="_blank";li.appendChild(a);li.appendChild(arch(k));li.appendChild(el("span","url"," "+M[k].u));hs.appendChild(li);});
 
 /* timeline */
 $("tl-total").textContent=T.length;

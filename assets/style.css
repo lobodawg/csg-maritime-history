@@ -188,3 +188,5 @@ h3{font-size:1.25rem;margin:1em 0 .4em}
 .vnote{font-size:.9rem;color:var(--muted);line-height:1.45}
 .ewatch{margin:.35em 0 0;font-size:.88rem}.ewatch a{font-weight:600}
 @media (max-width:560px){.vgrid{grid-template-columns:1fr;gap:16px}}
+
+.arch{font-size:.85em;white-space:nowrap}
