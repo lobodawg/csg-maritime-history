@@ -22,7 +22,7 @@ window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 
 /* stats */
 var yrs=T.filter(function(r){return r.d<"2025";});
-var stats=[[yrs.length,"timeline entries, 2016-2024"],[yrs.filter(function(r){return r.c==="M";}).length,"missions"],[yrs.filter(function(r){return r.c==="D";}).length,"drills and training days"],["2","state vessels tracked"],["1891","first state Naval Battalion"]];
+var stats=[[yrs.length,"timeline entries, 2016-2024"],[yrs.filter(function(r){return r.c==="M";}).length,"missions"],[yrs.filter(function(r){return r.c==="D";}).length,"drills and training days"],["5","vessels"],["1891","first state Naval Battalion"]];
 stats.forEach(function(s){var d=el("div","stat");d.appendChild(el("b",null,String(s[0])));d.appendChild(el("span",null,s[1]));$("stats").appendChild(d);});
 
 /* heritage */
