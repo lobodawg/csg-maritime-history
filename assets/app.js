@@ -22,7 +22,7 @@ window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 
 /* stats */
 var yrs=T.filter(function(r){return r.d<"2025";});
-var stats=[[yrs.filter(function(r){return r.c==="D";}).length,"drills and training days"],[yrs.filter(function(r){return r.c==="M";}).length,"missions"],["5","vessels"],["47,000+","estimated volunteer hours"]];
+var stats=[[yrs.filter(function(r){return r.c==="D";}).length,"drills and training days"],[yrs.filter(function(r){return r.c==="M";}).length,"missions"],["5","vessels"],["47,000+","estimated volunteer hours \u00b9"],["$865,000","estimated value at E-5 daily basic pay \u00b2"],["$1.73M","estimated value at E-5 drill-period pay \u00b3"]];
 stats.forEach(function(s){var d=el("div","stat");d.appendChild(el("b",null,String(s[0])));d.appendChild(el("span",null,s[1]));$("stats").appendChild(d);});
 
 /* heritage */
