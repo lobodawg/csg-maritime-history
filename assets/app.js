@@ -90,6 +90,7 @@ function render(){
     var meta=[];if(r.l)meta.push("Where: "+r.l);if(r.p)meta.push("People: "+r.p);
     if(meta.length)li.appendChild(el("p","meta",meta.join("  \u00B7  ")));
     if(r.s.length)li.appendChild(el("p","srcl","Source: "+r.s.join("; ")));
+    if(r.a)r.a.forEach(function(x){var p=el("p","ewatch"),a=el("a",null,"\uD83D\uDCF0 Read the article: "+x.t);a.href=x.u;a.target="_blank";a.rel="noopener";p.appendChild(a);if(x.by)p.appendChild(el("span","aby"," ("+x.by+")"));li.appendChild(p);});
     var vv=IDX2V[T.indexOf(r)];if(vv)vv.forEach(function(v){var p=el("p","ewatch"),a=el("a",null,"\u25B6 Watch on YouTube: "+v.t);a.href=ytUrl(v.id);a.target="_blank";a.rel="noopener";p.appendChild(a);li.appendChild(p);});
     E.appendChild(li);});
   $("tl-more").hidden=rows.length<=state.limit;
