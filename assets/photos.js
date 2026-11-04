@@ -26,7 +26,7 @@ window.PHOTOS = [
  {f:"dive20_0298.jpg", d:"2020-10-04", t:"Underwater hull inspection of PB470 before haul-out, 04-05 OCT 2020.", s:"D", g:"Maintenance"},
  {f:"haul20_0505.jpg", d:"2020-11-09", t:"Haul-out and preventive maintenance of the MLB, November 2020.", s:"D", g:"Maintenance"},
  {f:"vmm_beauty_night.jpg", d:"2020-12-12", t:"Cal Guard 47 at Vallejo Municipal Marina at night, December 2020.", s:"D", g:"Vessels"},
- {f:"vmm_hf_radio.jpg", d:"2020-12-12", t:"In the wheelhouse during December 2020 maintenance at Vallejo.", s:"D", g:"Maintenance"},
+ {f:"vmm_hf_radio.jpg", d:"2022-06", t:"MCC ONE CO & XO in the enclosed bridge during the return trip from the 2022 MARCOM AT.", s:"D", g:"Maintenance"},
  {f:"hmb21.jpg", d:"2021-03-20", t:"The MLB at Half Moon Bay, March 2021 UTA.", s:"D", g:"Training"},
  {f:"A_sffw21.jpg", d:"2021-10-07", t:"San Francisco Fleet Week 2021.", s:"A", g:"Missions"},
  {f:"rv22_mlb_29.jpg", d:"2022-02-19", t:"Three-vessel training at USCG Station Rio Vista with Coast Guard 29-ft boats, 19 FEB 2022.", s:"D", g:"Training"},
