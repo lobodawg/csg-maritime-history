@@ -22,7 +22,7 @@ window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 
 /* stats */
 var yrs=T.filter(function(r){return r.d<"2025";});
-var stats=[[yrs.filter(function(r){return r.c==="D";}).length,"drills and training days"],[yrs.filter(function(r){return r.c==="M";}).length,"missions"],["5","vessels"]];
+var stats=[[yrs.filter(function(r){return r.c==="D";}).length,"drills and training days"],[yrs.filter(function(r){return r.c==="M";}).length,"missions"],["5","vessels"],["47,000+","estimated volunteer hours"]];
 stats.forEach(function(s){var d=el("div","stat");d.appendChild(el("b",null,String(s[0])));d.appendChild(el("span",null,s[1]));$("stats").appendChild(d);});
 
 /* heritage */
